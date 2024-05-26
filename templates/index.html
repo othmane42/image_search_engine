@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <title>Image Search Engine</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Image Search Engine</h1>
+
+        <form id="search-form" action="/search" method="post" class="border p-4 rounded">
+            <div id="preview-container" class="text-center mb-3">
+                <div class="position-relative d-inline-block">
+                    <img id="preview" class="preview d-none" alt="Image Preview">
+                    <button id="remove-image" class="remove-button d-none">×</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="file">Upload an image:</label>
+                <input type="file" name="file" id="file" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="descriptor">Select descriptor:</label>
+                <select name="descriptor" id="descriptor" class="form-control" required style="width: 100%">
+                    <option value="vgg16">VGG16</option>
+                    <option value="resnet50">Resnet50</option>
+                    <option value="mobilenet">MobileNet</option>
+                    <!-- <option value="resnet50">ResNet50</option> -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="similarity">Select similarity measure:</label>
+                <select name="similarity" id="similarity" class="form-control" required>
+                    <option value="euclidean">Euclidean</option>
+                    <option value="correlation">Correlation</option>
+                    <option value="chi-square">Chi-square</option>
+                    <option value="cosine_distance">Cosine Distance</option>
+                    <option value="bhattacharyya">Bhattacharyya</option>
+                    <option value="brute-force-matcher">Brute Force Matcher</option>
+                    <option value="flann">FLANN</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="image_class">Class of the image (optional):</label>
+                <select name="image_class" id="image_class" class="form-control" style="width: 100%">
+                    <option value="">None</option>
+                    <option value="0">Africa</option>
+                    <option value="1">Beach</option>
+                    <option value="2">Buildings</option>
+                    <option value="3">Buses</option>
+                    <option value="4">Dinosaurs</option>
+                    <option value="5">Elephants</option>
+                    <option value="6">Flowers</option>
+                    <option value="7">Horses</option>
+                    <option value="8">Mountains</option>
+                    <option value="9">Food</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="topn">Top N results:</label>
+                <select name="topn" id="topn" class="form-control" required>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                </select>
+            </div>
+            <input type="hidden" name="filename" id="filename">
+            <button type="submit" class="btn btn-primary btn-block">Chercher</button>
+        </form>
+        <div class="result-container mt-4" id="result-container">
+            <!-- Results will be displayed here -->
+        </div>
+        <div class="text-center mt-4">
+            <img id="rp-curve" src="" alt="Precision-Recall Curve" class="d-none">
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+
+</html>

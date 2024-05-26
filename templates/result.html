@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Search Results</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Search Results</h1>
+
+        <div class="text-center">
+            <h2>Uploaded Image</h2>
+            <img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Uploaded Image" class="img-fluid"
+                style="max-width: 300px; height: auto;">
+        </div>
+
+        <h2 class="mt-4">Top 20 Similar Images</h2>
+        <div class="row">
+            {% for image in top20_similar_images %}
+            <div class="col-md-2 mb-3">
+                <img src="{{ url_for('uploaded_file', filename=image) }}" alt="Similar Image" class="img-thumbnail">
+            </div>
+            {% endfor %}
+        </div>
+
+        <h2 class="mt-4">Precision-Recall Curve</h2>
+        <div class="text-center">
+            <img src="{{ url_for('uploaded_file', filename=rp_curve) }}" alt="Precision-Recall Curve" class="img-fluid"
+                style="max-width: 500px; height: auto;">
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
